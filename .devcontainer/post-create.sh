@@ -1,21 +1,39 @@
 #!/bin/bash
 
-echo "Setting up OpenPlayground development environment..."
+echo "🚀 Setting up OpenPlayground development environment..."
 
-# Install frontend dependencies
-echo "Installing frontend dependencies..."
-cd /workspace/app
-npm install
+# Ensure we're in the project directory
+cd /workspaces/option-exp-playground || cd /workspaces/openplayground || cd /workspaces/*
 
-# Install backend dependencies using Poetry
-echo "Installing backend dependencies..."
-cd /workspace
-poetry install
+echo "📦 Installing frontend dependencies..."
+if [ -d "app" ]; then
+    cd app
+    npm install
+    cd ..
+else
+    echo "⚠️  app directory not found, skipping frontend setup"
+fi
 
-echo "Setup complete! You can now run the application."
+echo "🐍 Installing Python dependencies with Poetry..."
+if [ -f "pyproject.toml" ]; then
+    poetry install
+else
+    echo "⚠️  pyproject.toml not found, trying pip..."
+    if [ -f "server/requirements.txt" ]; then
+        pip install -r server/requirements.txt
+    fi
+fi
+
+echo "✅ Setup complete!"
 echo ""
-echo "To start the application:"
-echo "  Frontend: cd app && npx parcel watch src/index.html --no-cache"
-echo "  Backend: python -m server.app"
+echo "To run the application:"
+echo "  Option 1 - Two terminals:"
+echo "    Frontend: cd app && npx parcel watch src/index.html --no-cache"
+echo "    Backend: python -m server.app"
 echo ""
-echo "Or use the integrated command: openplayground run"
+echo "  Option 2 - Using Poetry (if installed):"
+echo "    poetry run openplayground run"
+echo ""
+echo "The application will be available at:"
+echo "  Main app: http://localhost:5432"
+echo "  Frontend dev: http://localhost:1234"
