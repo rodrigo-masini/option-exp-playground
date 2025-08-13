@@ -2,11 +2,12 @@
   "name": "OpenPlayground Dev Container",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   
   "features": {
     "ghcr.io/devcontainers/features/python:1": {
-      "version": "3.9"
+      "version": "3.9",
+      "installTools": true
     },
     "ghcr.io/devcontainers/features/node:1": {
       "version": "19"
@@ -19,16 +20,14 @@
         "ms-python.python",
         "ms-python.vscode-pylance",
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
-        "formulahendry.auto-rename-tag",
-        "christian-kohler.path-intellisense"
+        "esbenp.prettier-vscode"
       ],
       "settings": {
         "python.defaultInterpreterPath": "/usr/local/bin/python",
         "python.linting.enabled": true,
         "python.linting.pylintEnabled": true,
         "python.formatting.provider": "black",
-        "editor.formatOnSave": true
+        "terminal.integrated.defaultProfile.linux": "bash"
       }
     }
   },
