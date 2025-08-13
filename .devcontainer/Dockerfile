@@ -1,5 +1,5 @@
 # Use the Microsoft devcontainer Python image which already has vscode user
-FROM mcr.microsoft.com/devcontainers/python:3.9
+FROM mcr.microsoft.com/devcontainers/python:3.11
 
 # Switch to root for installations
 USER root
