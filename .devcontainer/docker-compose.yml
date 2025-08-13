@@ -6,16 +6,14 @@ services:
       context: ..
       dockerfile: .devcontainer/Dockerfile
     volumes:
-      - ..:/workspace:cached
-      - openplayground-config:/workspace/config
+      - ..:/workspaces/${localWorkspaceFolderBasename}:cached
+      - openplayground-config:/home/vscode/.config
     command: sleep infinity
     environment:
       - PYTHONDONTWRITEBYTECODE=1
       - PYTHONUNBUFFERED=1
-      - XDG_CONFIG_HOME=/workspace/config
-    ports:
-      - "5432:5432"
-      - "1234:1234"
+      - XDG_CONFIG_HOME=/home/vscode/.config
+    network_mode: host
 
 volumes:
   openplayground-config:
